@@ -4,18 +4,26 @@ pipeline {
 
     stages {
 
-        stage("Show Agent Info") {
-            steps {
-                sh "hostname"
-                sh "whoami"
-                sh "pwd"
-            }
-        }
-
         stage("Run Python") {
             steps {
                 sh "python3 app.py"
             }
+        }
+
+    }
+
+    post {
+
+        success {
+            echo "🎉 Build Successful"
+        }
+
+        failure {
+            echo "❌ Build Failed"
+        }
+
+        always {
+            echo "Pipeline Finished"
         }
 
     }
