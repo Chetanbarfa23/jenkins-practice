@@ -2,28 +2,20 @@ pipeline {
 
     agent any
 
-    stages {
-
-        stage("Run Python") {
-            steps {
-                sh "python3 app.py"
-            }
-        }
-
+    parameters {
+        choice(
+            name: 'ENVIRONMENT',
+            choices: ['DEV', 'TEST', 'PROD'],
+            description: 'Select Environment'
+        )
     }
 
-    post {
+    stages {
 
-        success {
-            echo "🎉 Build Successful"
-        }
-
-        failure {
-            echo "❌ Build Failed"
-        }
-
-        always {
-            echo "Pipeline Finished"
+        stage("Deploy") {
+            steps {
+                sh "echo Deploying to ${params.ENVIRONMENT}"
+            }
         }
 
     }
