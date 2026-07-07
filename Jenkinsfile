@@ -1,25 +1,23 @@
 pipeline {
+
     agent any
 
     stages {
 
-        stage("Show Current Folder") {
+        stage("Show Agent Info") {
             steps {
+                sh "hostname"
+                sh "whoami"
                 sh "pwd"
             }
         }
 
-        stage("List Files") {
-            steps {
-                sh "ls -la"
-            }
-        }
-
-        stage("Run Python Program") {
+        stage("Run Python") {
             steps {
                 sh "python3 app.py"
             }
         }
 
     }
+
 }
